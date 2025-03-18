@@ -1,0 +1,18 @@
+{
+  "name": "google-calendar-import",
+  "version": "1.0.0",
+  "description": "POC para leer eventos de un calendario público de Google Calendar",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "googleapis": "^128.0.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+} 
