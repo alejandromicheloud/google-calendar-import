@@ -10,6 +10,7 @@ Este es un proyecto de prueba (POC) que demuestra cómo leer eventos de un calen
 - Manejo de errores y respuestas JSON
 - Autenticación mediante API Key
 - Soporte para múltiples calendarios públicos
+- Paginación automática para obtener todos los eventos
 
 ## Requisitos Previos
 
@@ -58,38 +59,38 @@ npm run dev
 ## Endpoints
 
 ### GET /events
-Obtiene los próximos 10 eventos del calendario público.
+Obtiene todos los eventos del calendario público a partir de una fecha específica.
 
 #### Parámetros
 - `calendarId` (opcional): ID del calendario a consultar. Si no se proporciona, se usa el calendario de feriados de Argentina por defecto.
+- `timeMin` (opcional): Fecha y hora de inicio para obtener eventos (formato ISO 8601). Si no se proporciona, se usa la fecha y hora actual.
 
 #### Ejemplos
-- Obtener eventos del calendario por defecto:
+- Obtener todos los eventos desde ahora:
   ```
   GET http://localhost:3001/events
   ```
 
-- Obtener eventos de un calendario específico:
+- Obtener eventos de un calendario específico desde una fecha:
   ```
-  GET http://localhost:3001/events?calendarId=tu_calendario_id
+  GET http://localhost:3001/events?calendarId=tu_calendario_id&timeMin=2024-01-01T00:00:00Z
   ```
-- Ejemplo calendario de Brasil
-```
-  GET http://localhost:3000/events?calendarId=es.brazilian%23holiday%40group.v.calendar.google.com&ctz=America%2FArgentina%2FCordoba
-```
 
 **Respuesta exitosa:**
 ```json
-[
-  {
-    "id": "event_id",
-    "summary": "Nombre del evento",
-    "description": "Descripción del evento",
-    "start": "2024-03-20T10:00:00Z",
-    "end": "2024-03-20T11:00:00Z",
-    "location": "Ubicación del evento"
-  }
-]
+{
+  "total": 42,
+  "events": [
+    {
+      "id": "event_id",
+      "summary": "Nombre del evento",
+      "description": "Descripción del evento",
+      "start": "2024-03-20T10:00:00Z",
+      "end": "2024-03-20T11:00:00Z",
+      "location": "Ubicación del evento"
+    }
+  ]
+}
 ```
 
 ## Tecnologías Utilizadas
